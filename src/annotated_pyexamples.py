@@ -1,8 +1,9 @@
 import requests
+import json
 
 #%%variables that you might want to change on different runs
 user_name = r'valar morghulis'  #put name of person whose info/clan you want to explore
-user_platform = 'pc'  #either 'psn' or 'ps4' or 'xbone' or 'xbox'  (pc is busted)
+user_platform = 'steam'  #either 'psn' or 'ps4' or 'xbone' or 'xbox'  (pc is busted)
 save_to_file = 1  #flag: set to 1 if you want certain bits saved to file to peruse
 membershipId = '22111524'
 uniqueName = '22111524'
@@ -11,11 +12,15 @@ steamDisplayName = 'Valar.Morghulis'
 
 #%% fixed parameters
 my_api_key = '938b17f2fbcd41f7b228063c9517a677' #put your api key here!
+oauth_authurl = 'https://www.bungie.net/en/OAuth/Authorize'
+oauth_client_id = '33762'
+oauth_redirecturl = 'https://127.0.0.1:5000/callback/bungie'
+
 baseurl = 'https://www.bungie.net/Platform/Destiny2/'
 baseurl2 = 'https://www.bungie.net/Platform/'
 baseurl_groupv2 = 'https://www.bungie.net/Platform/GroupV2/'
 
-membership_types = {'xbox': '1',  'xbone': '1', 'psn': '2', 'pc': '4', 'ps4': '2'}
+membership_types = {'xbox': '1',  'xbone': '1', 'steam': '3', 'psn': '2', 'pc': '4', 'ps4': '2'}
 
 #Following conversions have names I use for user summary stats as keys,
 #and names that bungie uses as values for when I extract from end points.
@@ -426,6 +431,11 @@ def save_readable_json(data, filename):
 EXAMPLES
 """
 if __name__ == '__main__':
+    # oauth_session = requests.Session()
+    # oauth_session.headers['X-API-Key'] = my_api_key
+    # oauth_session.headers['Authorization'] = 'Bearer ' + str(oauth_token)
+
+
     #%%SearchUser to get user id
     #search_string = 'valar%20morghulis'
     #search_user_url = search_user_url(search_string)
